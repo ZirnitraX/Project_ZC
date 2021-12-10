@@ -18,6 +18,8 @@ void menu_actions(all_s *all, int i)
         break;
         case 3:
         all->state = gamest;
+        if (!all->player.is_init)
+            game_init(all);
         break;
     }
     

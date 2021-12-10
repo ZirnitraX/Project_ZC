@@ -27,7 +27,8 @@ void custom_events(all_s *all)
     case settingsst:
         settings_events(all);
         break;
-    default:
+    case gamest:
+        game_events(all);
         break;
     }  
 }

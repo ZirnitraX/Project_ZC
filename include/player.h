@@ -8,16 +8,18 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include <iostream>
+#include <string.h>
 
 enum PLAYER_STATE {
-    IDLE = 0, MOVING_LEFT, MOVING_RIGHT, JUMPING, FALLING
+    IDLE = 0, MOVING_LEFT, MOVING_RIGHT, JUMPING, FALLING, JUMPING_LEFT, JUMPING_RIGHT
 };
 
 class player_c {
     sf::Texture texture;
 public:
-    sf::Sprite sprite;
+    PLAYER_STATE state;
     sf::Vector2f scale;
+    sf::Sprite sprite;
     sf::Vector2f position;
     sf::IntRect rect;
     bool is_init;
@@ -40,6 +42,7 @@ public:
     }
     void base_init(void)
     {
+        state = IDLE;
         is_init = false;
         score = 0;
         is_ball = false;
@@ -55,5 +58,10 @@ public:
         position.x = x;
         position.y = y;
         sprite.setPosition(position);
+    }
+    void reverse()
+    {
+        scale.x *= -1;
+        sprite.setScale(scale);
     }
 };

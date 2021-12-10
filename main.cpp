@@ -12,6 +12,7 @@
 void game_loop(all_s *all)
 {
     all->wndw.create(sf::VideoMode(1920, 1080), "Project ZC", sf::Style::Close);
+    global_init(all);
     while (all->wndw.isOpen()) 
     {
         draw_things(all);

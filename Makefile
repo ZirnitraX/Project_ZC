@@ -5,13 +5,13 @@
 ## launch lib Makefile and compile evalexpr
 ##
 
-NAME	=	project_ZC
+NAME	=	project_Zt
 
 SRC	=	$(wildcard *.cpp)
 
 CXX=g++
 
-CFLAGS += -I include/ -W -Wall -Wextra -L lib -lmy -lsfml-graphics -lsfml-window -lsfml-system
+CFLAGS += -I include/ -W -Wall -Wextra -L lib -lmy -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
 
 OBJ	=	$(SRC:.cpp=.o)
 

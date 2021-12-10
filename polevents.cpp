@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2021
-** Project_ZC
+** Project_Zt
 ** File description:
 ** polevents
 */
@@ -15,4 +15,19 @@ void all_events(all_s *all)
         all->wndw.close();
         break;
     }
+}
+
+void custom_events(all_s *all)
+{
+    switch (all->state)
+    {
+    case menust:
+        menu_events(all);
+        break;
+    case settingsst:
+        settings_events(all);
+        break;
+    default:
+        break;
+    }  
 }

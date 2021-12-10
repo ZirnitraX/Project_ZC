@@ -6,21 +6,21 @@
 */
 
 #include <cstdio>
+#include <SFML/Audio.hpp>
 #include "include/project.h"
 
 void game_loop(all_s *all)
 {
-    all->wndw.create(sf::VideoMode(1920, 1080), "Project ZC", sf::Style::Default);
-    all->state = menust;
-    setup_menu(all);
+    all->wndw.create(sf::VideoMode(1920, 1080), "Project ZC", sf::Style::Close);
     while (all->wndw.isOpen()) 
     {
+        draw_things(all);
+        all->wndw.display();
         while (all->wndw.pollEvent(all->evt))
         {
             all_events(all);
+            custom_events(all);
         }
-        all->wndw.draw(all->mnbt.sprite);
-        all->wndw.display();
     }
 }
 

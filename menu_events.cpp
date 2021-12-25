@@ -28,18 +28,18 @@ void menu_actions(all_s *all, int i)
 void menu_events(all_s *all)
 {
     for (int i = 1; i != 4; i++) {
-        if (is_mouse_over(all->wndw, all->stdbt[i].sprite)) {
-            all->stdbt[i].move_rect(150, 0, 450, 150);
+        if (is_mouse_over(all->wndw, all->menu.stdbt[i].sprite)) {
+            all->menu.stdbt[i].move_rect(150, 0, 450, 150);
             if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left)) {
-                all->stdbt[i].move_rect(300, 0, 450, 150);
+                all->menu.stdbt[i].move_rect(300, 0, 450, 150);
             if (all->evt.type == sf::Event::MouseButtonPressed)
-                all->clik_snd.sound.play();
+                all->menu.clik_snd.sound.play();
             } if (all->evt.type == sf::Event::MouseButtonReleased) {
-                all->clak_snd.sound.play();
+                all->menu.clak_snd.sound.play();
                     menu_actions(all, i);
             }
         }
         else 
-            all->stdbt[i].move_rect(0, 0, 450, 150);
+            all->menu.stdbt[i].move_rect(0, 0, 450, 150);
     }
 }

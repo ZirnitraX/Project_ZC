@@ -22,6 +22,9 @@ void game_loop(all_s *all)
             all_events(all);
             custom_events(all);
         }
+        if (all->state == gamest) {
+            game_play(all);
+        }
     }
 }
 

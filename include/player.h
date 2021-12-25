@@ -11,17 +11,27 @@
 #include <string.h>
 
 enum PLAYER_STATE {
-    IDLE = 0, MOVING_LEFT, MOVING_RIGHT, JUMPING, FALLING, JUMPING_LEFT, JUMPING_RIGHT
+    IDLE = 0, MOVING_LEFT, MOVING_RIGHT, JUMPING, FALLING, JUMPING_LEFT, JUMPING_RIGHT, MOVING_UP, MOVING_DOWN
+};
+
+enum LAST_HIT {
+    WALL = 0, TOP, BOTTOM,
 };
 
 class player_c {
     sf::Texture texture;
 public:
-    PLAYER_STATE state;
-    sf::Vector2f scale;
-    sf::Sprite sprite;
     sf::Vector2f position;
+    sf::Vector2f scale;
+    sf::Vector2f origin;
+    LAST_HIT last_hit;
+    PLAYER_STATE state;
+    sf::Clock anim_clock;
+    sf::Clock mov_clock;
+    sf::Sprite sprite;
     sf::IntRect rect;
+    sf::Vector2f velocity;
+    bool is_moving;
     bool is_init;
     bool is_ball;
     int score;
@@ -36,21 +46,24 @@ public:
         sprite.setPosition(pos);
         if (rct.height != 0 && rct.width != 0)
             sprite.setTextureRect(rct);
-        scale = sc;
         position = pos;
+        scale = sc;
         rect = rct;
     }
     void base_init(void)
     {
         state = IDLE;
+        origin = {0.f, 0.f};
         is_init = false;
         score = 0;
         is_ball = false;
+        is_moving = false;
+        last_hit = BOTTOM;
     }
-    void move(int x, int y)
+    void move(sf::Vector2f vect)
     {
-        position.x += x;
-        position.y += y;
+        position.x += vect.x;
+        position.y += vect.y;
         sprite.setPosition(position);
     }
     void place(int x, int y)
@@ -59,9 +72,19 @@ public:
         position.y = y;
         sprite.setPosition(position);
     }
-    void reverse()
+    void setScale(const float x,const float y)
     {
-        scale.x *= -1;
+        sf::Vector2f scale;
+        scale.x = x;
+        scale.y = y;
         sprite.setScale(scale);
+    }
+    sf::Vector2f get_center(void)
+    {
+        sf::Vector2f result;
+
+        result.x = sprite.getPosition().x + sprite.getGlobalBounds().width;
+        result.y = sprite.getPosition().y + sprite.getGlobalBounds().height;
+        return (result);
     }
 };

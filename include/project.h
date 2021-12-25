@@ -22,6 +22,8 @@ void settings_events(all_s *all);
 void setup_settings(all_s *all);
 
 void game_events(all_s *all);
+void game_play(all_s *all);
+bool is_colision(player_c player, sprites_s obj);
 void game_init(all_s *all);
 
 bool is_mouse_over(sf::RenderWindow& wndw, sf::Sprite sprite);

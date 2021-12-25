@@ -21,9 +21,12 @@ void draw_settings(sprites_s *stdbt, sf::RenderWindow& wndw)
     wndw.draw(stdbt[5].text);
 }
 
-void draw_game(sf::RenderWindow& wndw, player_c player)
+void draw_game(sf::RenderWindow& wndw, player_c player, sprites_s *game, Ball_c ball)
 {
+    for (int i = 0; i != 7; i++)
+        wndw.draw(game[i].sprite);
     wndw.draw(player.sprite);
+    wndw.draw(ball.sprite);
 }
 
 void draw_things(all_s *all)
@@ -32,13 +35,13 @@ void draw_things(all_s *all)
     switch (all->state)
     {
     case menust:
-        draw_menu(all->stdbt, all->wndw);
+        draw_menu(all->menu.stdbt, all->wndw);
         break;
     case settingsst:
-        draw_settings(all->stdbt, all->wndw);
+        draw_settings(all->menu.stdbt, all->wndw);
         break;
     case gamest:
-        draw_game(all->wndw, all->player);
+        draw_game(all->wndw, all->player, all->game_env, all->ball);
         break;
     }
 }

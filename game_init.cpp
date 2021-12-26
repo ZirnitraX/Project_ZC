@@ -11,7 +11,7 @@ void game_init(all_s *all)
 {
     if (!all->player.is_init) {
         all->player.create_sprite("assets/player.png", vct2f(300, 500), irect(0, 0, 95, 102), vct2f(0.7f, 0.7f));
-        all->ball.create_sprite("assets/ball.png", vct2f(700, 600), irect(0, 0, 195, 200), vct2f(0.2f, 0.2f));
+        all->ball.create_sprite("assets/ball.png", vct2f(700, 600), irect(0, 0, 195, 200), vct2f(0.3f, 0.3f));
     }
     all->game_env[0].create_sprite("assets/gam_bck.png");
     all->game_env[1].create_sprite("assets/wall.png", vct2f(-20, 0), irect(0, 0, 0, 0), vct2f(1, 3.3));

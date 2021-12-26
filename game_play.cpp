@@ -113,8 +113,25 @@ void player_collision(player_c *player, sprites_s *game_env, Ball_c *ball, sf::E
         }
     }
     if (player->is_ball == false && evt.type == sf::Event::MouseButtonPressed)
-        if (player->sprite.getGlobalBounds().intersects(ball->sprite.getGlobalBounds()))
+        if (player->sprite.getGlobalBounds().intersects(ball->sprite.getGlobalBounds())) {
             player->is_ball = true;
+            ball->acceleration = 1.f;
+        }
+}
+
+void ball_collision(Ball_c *ball, sprites_s *game_env)
+{
+    for (int i = 1; i != 5; i++) {
+        if (ball->sprite.getGlobalBounds().intersects(game_env[i].sprite.getGlobalBounds())) {
+            ball->movebck();
+            if (ball->acceleration < 13.f)    
+                ball->acceleration += 0.2f;
+            if (i == 3 || i == 4)
+                ball->velocity.y *= -1;
+            else
+                ball->velocity.x *= -1;
+        }
+    }
 }
 
 void game_play(all_s *all)
@@ -125,6 +142,13 @@ void game_play(all_s *all)
     if (all->player.is_ball == true) {
         all->ball.place(all->player.position);
         if (all->evt.type == sf::Event::MouseButtonReleased)
-            all->player.is_ball = 0;
+            all->player.is_ball = false;
+            all->ball.velocity = {11.f, 11.f};
+            all->ball.acceleration = 1.f;
     }
-}        
+    printf("%.2f\n", all->ball.acceleration);
+    if (all->player.is_ball == false) {
+        all->ball.move();
+        ball_collision(&all->ball, all->game_env);
+    }
+}

@@ -17,6 +17,8 @@ public:
     sf::Vector2f position;
     sf::IntRect rec;
     sf::Sprite sprite;
+    sf::Vector2f velocity;
+    float acceleration;
     
     void create_sprite(const char *str, sf::Vector2f pos = {0, 0}, const sf::IntRect rct = {0, 0, 0, 0},  sf::Vector2f sc = {1, 1})
     {
@@ -28,6 +30,7 @@ public:
         sprite.setPosition(pos);
         if (rct.height != 0 && rct.width != 0)
             sprite.setTextureRect(rct);
+        acceleration = 1.f;
         scale = sc;
         position = pos;
         rec = rct;
@@ -46,10 +49,16 @@ public:
         scale.y = y;
         sprite.setScale(scale);
     }
-    void move(float x, float y)
+    void move()
     {
-        position.x += x;
-        position.y += y;    
+        position.x += (velocity.x * acceleration);
+        position.y += (velocity.y * acceleration);
+        sprite.setPosition(position);   
+    }
+    void movebck(void)
+    {
+        position.x -= (velocity.x * acceleration);
+        position.y -= (velocity.y * acceleration);
         sprite.setPosition(position);   
     }
     void place(sf::Vector2f toset) {
